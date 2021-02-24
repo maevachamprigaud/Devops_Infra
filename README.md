@@ -1,10 +1,10 @@
 # Devops_Infra
 
-# Deployment
+## Deployment
 
-## Nginx Ingress Controller
+### Nginx Ingress Controller
 
-## Kube-Prometheus
+### Kube-Prometheus
 
 Kube-Prometheus est un opérateur Prometheus qui déploie Alertmanager, Node-Exporter, Prometheus et Grafana. L'opérateur original est trouvable à cette adresse : https://github.com/prometheus-operator/kube-prometheus.
 La première étape consiste à déployer le dossier Setup.
@@ -25,11 +25,11 @@ On peut ensuite déployer le reste de l'opérateur.
 kubectl create -f kube-prometheus/
 ```
 
-## SonarQube
+### SonarQube
 
 
 
-## Jenkins
+### Jenkins
 
 ```
 cd jenkins/
