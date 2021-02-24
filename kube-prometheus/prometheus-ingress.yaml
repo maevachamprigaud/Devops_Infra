@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: prometheus
+  namespace: monitoring
+  labels:
+    prometheus: k8s
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/session-cookie-hash: sha1
+    nginx.ingress.kubernetes.io/session-cookie-name: route
+spec:
+  rules:
+    - host: prometheus
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: prometheus-k8s
+              servicePort: 9090
+  tls:
+  - hosts:
+    - prometheus
+    secretName: prometheus
+

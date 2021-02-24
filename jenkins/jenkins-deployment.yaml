@@ -1,0 +1,148 @@
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: jenkins
+  namespace: monitoring
+  labels:
+    app: jenkins
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: jenkins
+  namespace: ci-cd
+  labels:
+    app: jenkins
+    version: dev
+spec:
+  replicas: 1
+  serviceName: jenkins
+  selector:
+    matchLabels:
+      app: jenkins
+      version: dev
+  template:
+    metadata:
+      labels:
+        app: jenkins
+        version: dev
+    spec:
+      containers:
+      - name: jenkins
+        image: jenkins/jenkins
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: docker-socket-volume
+        - name: jenkins-data
+          mountPath: /var/jenkins_home
+          subPath: _data
+        securityContext:
+          privileged: true
+          runAsUser: 0
+          runAsGroup: 0
+        ports:
+        - containerPort: 8080
+        - containerPort: 30000
+
+      - name: jenkins-exporter
+        image: lovoo/jenkins_exporter:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9118
+        args: ["-j http://jenkins"]
+
+      volumes:
+      - name: docker-socket-volume
+        hostPath:
+          path: /var/run/docker.sock
+          type: File
+
+  volumeClaimTemplates:
+  - metadata:
+      name: jenkins-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: standard
+      resources:
+        requests:
+          storage: 10Gi
+
+    #resources:
+    # limits:
+    #   cpu: 500m
+    #   memory: 1500Mi
+    # requests:
+    #   cpu: 500m
+    #   memory: 1500Mi
+
+          # imagePullSecrets:
+          #  - name:
+
+
+---
+#Service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins
+  namespace: ci-cd
+spec:
+  type: ClusterIP
+  selector:
+    app: jenkins
+    version: dev
+  ports:
+  - port: 8080
+    targetPort: 8080
+    name: http
+  - port: 30000
+    targetPort: 30000
+    name: http2
+  - port: 9118
+    targetPort: 9118
+    name: jenkins-exporter
+
+---
+#Ingress
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  name: jenkins
+  namespace: ci-cd
+spec:
+  rules:
+  - host: jenkins 
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: jenkins 
+            servicePort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cloud.google.com/load-balancer-type: "External"
+  name: jenkins-lb
+  namespace: ci-cd
+spec:
+  type: LoadBalancer
+  selector:
+    app: jenkins
+    version: dev
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: jenkins
+

@@ -1,0 +1,23 @@
+apiVersion: v1
+data:
+  prometheus-additional2.yaml: LSBqb2JfbmFtZTogImplbmtpbnMiCiAgc3RhdGljX2NvbmZpZ3M6CiAgLSB0YXJnZXRzOiBbImplbmtpbnMuY2ktY2Quc3ZjLmNsdXN0ZXIubG9jYWw6OTExOCJdCgo=
+kind: Secret
+metadata:
+  creationTimestamp: "2021-02-24T11:29:09Z"
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:data:
+        .: {}
+        f:prometheus-additional2.yaml: {}
+      f:type: {}
+    manager: kubectl-create
+    operation: Update
+    time: "2021-02-24T11:29:09Z"
+  name: additional-scrape-configs2
+  namespace: monitoring
+  resourceVersion: "77210"
+  selfLink: /api/v1/namespaces/monitoring/secrets/additional-scrape-configs2
+  uid: 1023cf4d-5144-4362-b90c-b63c7fe8df75
+type: Opaque

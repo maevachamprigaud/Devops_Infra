@@ -1,0 +1,4 @@
+- job_name: "jenkins"
+  static_configs:
+  - targets: ["jenkins.ci-cd.svc.cluster.local:9118"]
+
