@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ydays-ingress
+  namespace: ci-cd
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: ydays.devops
+    http:
+      paths:
+        - path: /app-python
+          backend:
+            serviceName: app-python
+            servicePort: 80
+        - path: /jenkins
+          backend:
+            serviceName: jenkins
+            servicePort: 8080
+        - path: /sonarqube
+          backend:
+            serviceName: sonarqube
+            servicePort: 9000
+        - path: /grafana
+          backend:
+            serviceName: grafana.monitoring
+            servicePort: 3000
+        - path: /prometheus
+          backend:
+            serviceName: prometheus-k8s.monitoring
+            servicePort: 9090
