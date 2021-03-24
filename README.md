@@ -27,7 +27,20 @@ kubectl create -f kube-prometheus/
 
 ### SonarQube
 
+SonarQube est déployé à l'aide de Helm. Le projet est disponible ici : https://github.com/Oteemo/charts/tree/master/charts/sonarqube.
+On commence par installer Helm, s'il n'est pas déjà installé: 
 
+```
+$ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+$ chmod 700 get_helm.sh
+$ ./get_helm.sh
+```
+On ajoute ensuite le repo de Sonarqube, puis on l'installe.
+
+```
+helm repo add oteemocharts https://oteemo.github.io/charts
+helm install -n ci-cd oteemocharts/sonarqube
+```
 
 ### Jenkins
 
