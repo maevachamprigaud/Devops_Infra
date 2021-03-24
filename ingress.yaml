@@ -7,13 +7,13 @@ metadata:
     ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: ydays.devops
+  - host: ydaysdevops.tk
     http:
       paths:
         - path: /app-python
           backend:
             serviceName: app-python
-            servicePort: 80
+            servicePort: 8081
         - path: /jenkins
           backend:
             serviceName: jenkins
