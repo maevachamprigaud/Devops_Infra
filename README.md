@@ -76,3 +76,12 @@ Une fois le Nginx mis en place, on peut ensuite déployer tous les ingresses du 
 cd ingress/
 kubectl create -f ingress.yaml
 ```
+
+### Load Balancer
+
+Enfin, il faut déployer les load balancers.
+
+```
+cd loadbalancer/
+kubectl create -f loadbalancer.yaml
+```
