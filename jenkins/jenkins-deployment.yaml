@@ -43,6 +43,9 @@ spec:
           privileged: true
           runAsUser: 0
           runAsGroup: 0
+        env:
+        - name: JENKINS_OPTS
+          value: --prefix=/jenkins
         ports:
         - containerPort: 8080
         - containerPort: 30000
