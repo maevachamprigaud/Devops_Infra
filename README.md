@@ -1,8 +1,19 @@
 # Devops_Infra
 
+## Fonctionnement
+
+Les ressources sont déployées sur l'outil GKE, soit l'outil Google de Kubernetes. 
+
 ## Deployment
 
 ### Nginx Ingress Controller
+
+Nginx permet de transformer les IPs des services en noms de domaines. Cependant, pour les ingress créés de cette manière, on ne peut y accéder qu'en modifiant son /etc/hosts.
+Pour installer Nginx, il suffit de lancer cette commande : 
+
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.45.0/deploy/static/provider/cloud/deploy.yaml
+```
 
 ### Kube-Prometheus
 
@@ -27,6 +38,7 @@ kubectl create -f kube-prometheus/
 
 ### SonarQube
 
+SonarQube permet d'analyser du code et de trouver les erreurs et les points à améliorer.
 SonarQube est déployé à l'aide de Helm. Le projet est disponible ici : https://github.com/Oteemo/charts/tree/master/charts/sonarqube.
 On commence par installer Helm, s'il n'est pas déjà installé: 
 
@@ -43,6 +55,9 @@ helm install -n ci-cd oteemocharts/sonarqube
 ```
 
 ### Jenkins
+
+Jenkins est un outil d'automatisation, permettant le build automatique d'images ou de projets. 
+Pour l'installer, on fait comme ceci :
 
 ```
 cd jenkins/
