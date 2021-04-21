@@ -4,8 +4,8 @@
 
 ![PushGitHub](infra.png)
 
-
-Les ressources sont déployées sur l'outil GKE, soit l'outil Google de Kubernetes. 
+Les ressources sont déployées sur l'outil GKE, soit l'outil Google de Kubernetes. Le monitoring est composé de la suite Kube-Prometheus, qui déploie Prometheus, Grafana et Alertmanager. Prometheus permet de stocker des métriques concernant les différents pods du cluster, tandis que Grafana permet d'afficher ces métriques sous forme de graphique. Alertmanager quant à lui permet de créer des alertes sur ces métriques.
+Jenkins et SonarQube sont deux outils de CI-CD. Jenkins permet le build automatisé d'images, et SonarQube est un outil de vérification de code. Enfin, le controller Nginx permet de créer une interface graphique aux pods en ayant besoin ou pouvant en bénéficier. 
 
 ![PushGitHub](PushGitHub.png)
 
