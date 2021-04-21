@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cloud.google.com/load-balancer-type: "External"
+  name: grafana-k8s
+  namespace: ci-cd
+spec:
+  type: LoadBalancer
+  selector:
+    app: grafana
+  ports:
+  - port: 3000
+    targetPort: 3000
+    protocol: TCP
+    name: grafana
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cloud.google.com/load-balancer-type: "External"
+  name: prometheus
+  namespace: ci-cd
+spec:
+  type: LoadBalancer
+  selector:
+    prometheus: k8s
+  ports:
+  - port: 9090
+    targetPort: 9090
+    protocol: TCP
+    name: prometheus
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cloud.google.com/load-balancer-type: "External"
+  name: sonarqube-k8s
+  namespace: ci-cd
+spec:
+  type: LoadBalancer
+  selector:
+    app: sonarqube
+  ports:
+  - port: 9000
+    targetPort: 9000
+    protocol: TCP
+    name: sonarqube
