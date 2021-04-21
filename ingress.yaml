@@ -25,9 +25,9 @@ spec:
             servicePort: 9000
         - path: /grafana
           backend:
-            serviceName: grafana.monitoring
+            serviceName: grafana
             servicePort: 3000
         - path: /prometheus
           backend:
-            serviceName: prometheus-k8s.monitoring
+            serviceName: prometheus-k8s
             servicePort: 9090
