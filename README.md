@@ -2,6 +2,9 @@
 
 ## Fonctionnement
 
+![PushGitHub](infra.png)
+
+
 Les ressources sont déployées sur l'outil GKE, soit l'outil Google de Kubernetes. 
 
 ![PushGitHub](PushGitHub.png)
