@@ -21,7 +21,7 @@ spec:
             servicePort: 8080
         - path: /sonarqube
           backend:
-            serviceName: sonarqube
+            serviceName: sonarqube-sonarqube
             servicePort: 9000
         - path: /grafana
           backend:
