@@ -4,6 +4,10 @@
 
 Les ressources sont déployées sur l'outil GKE, soit l'outil Google de Kubernetes. 
 
+![PushGitHub](PushGitHub.png)
+
+Lors d'un push sur le repository de l'application, Jenkins se lance automatiquement pour pull le repository et build l'image. Pendant cette procédure, SonarQube examine le code pour trouver des erreurs ou des points à améliorer. Ensuite, l'image est renommée et est envoyée sur le registre d'images de Google. Enfin, un nouveau pod est créé avec cette nouvelle image. 
+
 ## Deployment
 
 ### Nginx Ingress Controller
