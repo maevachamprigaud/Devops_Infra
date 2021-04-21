@@ -20,7 +20,7 @@ La première étape consiste à déployer le dossier Setup.
 
 ```
 cd kube-prometheus
-kubectl create -f kube-prometheus/setup
+kubectl create -f kube-prometheus-ydays/setup
 ```
 
 Puis, il nous faut créer un secret. Ce secret contient les informations nécessaires à Prometheus pour qu'il puisse monitorer d'autres ressources que celles par défaut (Ici Jenkins). 
@@ -31,7 +31,7 @@ kubectl create secret generic -n monitoring additional-scrape-configs --from-fil
 On peut ensuite déployer le reste de l'opérateur.
 
 ```
-kubectl create -f kube-prometheus/
+kubectl create -f kube-prometheus-ydays/
 ```
 
 ### SonarQube
