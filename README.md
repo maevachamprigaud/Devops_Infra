@@ -49,7 +49,7 @@ On ajoute ensuite le repo de Sonarqube, puis on l'installe.
 
 ```
 helm repo add oteemocharts https://oteemo.github.io/charts
-helm install -n ci-cd oteemocharts/sonarqube
+helm install -n ci-cd sonarqube oteemocharts/sonarqube
 ```
 
 ### Jenkins
