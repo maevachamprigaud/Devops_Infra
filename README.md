@@ -13,15 +13,6 @@ Lors d'un push sur le repository de l'application, Jenkins se lance automatiquem
 
 ## Deployment
 
-### Nginx Ingress Controller
-
-Nginx permet de transformer les IPs des services en noms de domaines. Cependant, pour les ingress créés de cette manière, on ne peut y accéder qu'en modifiant son /etc/hosts.
-Pour installer Nginx, il suffit de lancer cette commande : 
-
-```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.45.0/deploy/static/provider/cloud/deploy.yaml
-```
-
 ### Kube-Prometheus
 
 Kube-Prometheus est un opérateur Prometheus qui déploie Alertmanager, Node-Exporter, Prometheus et Grafana. L'opérateur original est trouvable à cette adresse : https://github.com/prometheus-operator/kube-prometheus.
@@ -69,4 +60,19 @@ Pour l'installer, on fait comme ceci :
 ```
 cd jenkins/
 kubectl create -f jenkins-deployment.yaml
+```
+### Nginx Ingress Controller
+
+Nginx permet de transformer les IPs des services en noms de domaines. Cependant, pour les ingress créés de cette manière, on ne peut y accéder qu'en modifiant son /etc/hosts.
+Pour installer Nginx, il suffit de lancer cette commande : 
+
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.45.0/deploy/static/provider/cloud/deploy.yaml
+```
+
+Une fois le Nginx mis en place, on peut ensuite déployer tous les ingresses du projet.
+
+```
+cd ingress/
+kubectl create -f ingress.yaml
 ```
